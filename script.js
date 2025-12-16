@@ -212,18 +212,14 @@ if (document.readyState === 'loading') {
     initTypingAnimation();
 }
 
-// Theme Toggle Functionality
+// Theme Toggle Functionality (using navbar toggle)
 function initThemeToggle() {
-    const themeToggle = document.getElementById('themeToggleBottom');
-    const themeIcon = document.getElementById('themeIconBottom');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
     const html = document.documentElement;
     
-    // Debug logging
-    console.log('Theme toggle button:', themeToggle);
-    console.log('Theme icon:', themeIcon);
-    
-    if (!themeToggle) {
-        console.error('Theme toggle button not found!');
+    if (!themeToggle || !themeIcon) {
+        console.error('Theme toggle button or icon not found!');
         return;
     }
     
@@ -231,11 +227,6 @@ function initThemeToggle() {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     html.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme, themeIcon);
-    
-    // Make sure button is visible
-    themeToggle.style.display = 'flex';
-    themeToggle.style.visibility = 'visible';
-    themeToggle.style.opacity = '1';
     
     // Toggle theme on button click
     themeToggle.addEventListener('click', () => {
@@ -245,11 +236,7 @@ function initThemeToggle() {
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme, themeIcon);
-        
-        console.log('Theme switched to:', newTheme);
     });
-    
-    console.log('Theme toggle initialized successfully');
 }
 
 function updateThemeIcon(theme, iconElement) {

@@ -217,6 +217,10 @@ section.visible {
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="light"] .nav-social {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .social-link {
     color: var(--text-primary);
     font-size: 14px;
@@ -232,6 +236,32 @@ section.visible {
 .social-link:hover {
     background: var(--apple-gray-2);
     opacity: 0.8;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: var(--transition-fast);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.theme-toggle:hover {
+    background: var(--apple-gray-2);
+    opacity: 0.8;
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: var(--apple-gray-2);
 }
 
 .hamburger {
