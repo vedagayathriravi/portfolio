@@ -2841,13 +2841,21 @@ section {
     color: var(--apple-white);
     font-size: 20px;
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
     transition: var(--transition-fast);
-    z-index: 1000;
+    z-index: 9999;
     backdrop-filter: blur(10px);
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.theme-toggle-bottom i {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 1;
 }
 
 .theme-toggle-bottom:hover {
