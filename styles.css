@@ -2769,7 +2769,27 @@ section {
     }
 
     section {
-        padding: 80px 0;
+        padding: 60px 0;
+    }
+
+    /* Reduce gap between experience and skills on mobile */
+    .experience {
+        padding-bottom: 30px;
+    }
+
+    .skills {
+        padding-top: 30px;
+    }
+
+    /* Reduce padding in experience items on mobile */
+    .exp-item {
+        padding: 24px;
+        margin-bottom: 16px;
+    }
+
+    /* Remove extra margin from last exp-item */
+    .exp-item:last-child {
+        margin-bottom: 0;
     }
 
     .section-title {
