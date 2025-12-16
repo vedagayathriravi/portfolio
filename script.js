@@ -156,10 +156,101 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-// Hero role static text (typing effect disabled to prevent screen movement)
-const typingElement = document.querySelector('.typing-text');
-if (typingElement) {
-    typingElement.textContent = 'Data Engineer · ML Engineer · Software Developer';
+// Hero role typing animation - cycles through roles one by one
+function initTypingAnimation() {
+    const typingElement = document.querySelector('.typing-text');
+    if (!typingElement) {
+        console.error('Typing element not found');
+        return;
+    }
+    
+    // Clear any existing content immediately
+    typingElement.textContent = '';
+    
+    const roles = ['Software Engineer', 'ML Engineer', 'Data Engineer'];
+    let currentRoleIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let typingSpeed = 100; // milliseconds per character
+    
+    function typeRole() {
+        const currentRole = roles[currentRoleIndex];
+        
+        if (!isDeleting && currentCharIndex < currentRole.length) {
+            // Typing forward
+            typingElement.textContent = currentRole.substring(0, currentCharIndex + 1);
+            currentCharIndex++;
+            setTimeout(typeRole, typingSpeed);
+        } else if (!isDeleting && currentCharIndex === currentRole.length) {
+            // Finished typing, wait before deleting
+            setTimeout(() => {
+                isDeleting = true;
+                typeRole();
+            }, 2000); // Wait 2 seconds before deleting
+        } else if (isDeleting && currentCharIndex > 0) {
+            // Deleting backward
+            currentCharIndex--;
+            typingElement.textContent = currentRole.substring(0, currentCharIndex);
+            setTimeout(typeRole, typingSpeed / 2); // Delete faster than typing
+        } else if (isDeleting && currentCharIndex === 0) {
+            // Finished deleting, move to next role
+            isDeleting = false;
+            currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+            setTimeout(typeRole, 500); // Brief pause before next role
+        }
+    }
+    
+    // Start typing animation
+    typeRole();
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTypingAnimation);
+} else {
+    // DOM is already ready
+    initTypingAnimation();
+}
+
+// Theme Toggle Functionality
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggleBottom');
+    const themeIcon = document.getElementById('themeIconBottom');
+    const html = document.documentElement;
+    
+    // Get saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme, themeIcon);
+    
+    // Toggle theme on button click
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme, themeIcon);
+        });
+    }
+}
+
+function updateThemeIcon(theme, iconElement) {
+    if (iconElement) {
+        if (theme === 'dark') {
+            iconElement.className = 'fas fa-moon';
+        } else {
+            iconElement.className = 'fas fa-sun';
+        }
+    }
+}
+
+// Initialize theme toggle
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeToggle);
+} else {
+    initThemeToggle();
 }
 
 // Make hero section visible on load
