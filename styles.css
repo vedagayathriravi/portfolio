@@ -1957,7 +1957,7 @@ section {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
     margin-top: 60px;
 }
@@ -2806,6 +2806,34 @@ section {
 
     .projects-grid {
         grid-template-columns: 1fr;
+        min-width: 0;
+        gap: 16px;
+        margin-top: 40px;
+    }
+
+    .project-card {
+        min-width: 0;
+        width: 100%;
+        padding: 24px;
+    }
+
+    /* Ensure projects section is visible on mobile */
+    .projects {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .projects .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 16px;
+    }
+
+    .projects .section-header,
+    .projects .section-subtitle {
+        display: block !important;
+        visibility: visible !important;
     }
 
     .skills-grid {
